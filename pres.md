@@ -254,3 +254,41 @@ write(*,*) variavel
 
 Escrever código que lê dois números reais do terminal e imprime o resultado da soma deles
 
+# Loops
+
+Dois tipos básicos
+
+```fortran
+print*, "do simples"
+do i=1,3
+    do j=1,3
+        print*, i,j
+    end do
+end do
+
+print*, "do while"
+i=1
+do while(i<=3)
+    j = 1
+    do while(j<=3)
+        print*, i,j
+        j = j + 1
+    end do
+    i = i + 1
+end do
+```
+
+# Loops
+
+## Do concurrent
+
+```fortran
+print*, "do concurrent"
+do concurrent(i=1:3, j=1:3)
+    print*, i,j
+end do
+```
+
+## Exercício
+
+Escreva o código dos últimos dois slides e veja o resultado
