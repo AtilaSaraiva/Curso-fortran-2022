@@ -9,5 +9,6 @@ mkShell {
   buildInputs = [
     gfortran
     fortran-fpm
+    notepadqq
   ];
 }
