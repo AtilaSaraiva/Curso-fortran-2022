@@ -297,4 +297,44 @@ Escreva o código dos últimos dois slides e veja o resultado
 
 # Condicionais
 
+```fortran
+if (logical_expression1) then
+   ! Block of code
+else if (logical_expression2) then
+   ! Block of code
+else
+   ! Block of code
+end if
+```
 
+# Condicionais
+
+![Operadores Relacionais](figs/relational-operators.png){height=7cm}
+
+# Condicionais
+
+## Para checar mais de uma expressão faça
+
+```
+if ((a .gt. b) .and. .not. (a .lt. c)) then
+```
+
+# Condicionais
+
+```fortran
+program xif
+    implicit none
+    real :: x
+    real, parameter :: x1 = 0.3, x2 = 0.6
+
+    call random_seed()
+    call random_number(x)
+    if (x < x1) then
+        print *, x, "<",x1
+    else if (x < x2) then
+        print *, x, "<", x2
+    else
+        print *, x, ">=", x2
+    end if
+end program xif
+```
