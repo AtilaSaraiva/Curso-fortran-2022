@@ -338,3 +338,40 @@ program xif
     end if
 end program xif
 ```
+
+# Case
+
+Nós podemos representar o seguinte código
+
+```fortran
+if (month=="January" .or. month=="December") then
+    num_days = 31
+else if (month=="February") then
+    num_days = 28
+else if (month=="March") then
+    num_days = 31
+else
+    num_days = 30
+end if
+```
+
+# Case
+
+De forma simplificada por
+
+```fortran
+select case (month)
+    case ("January", "December")
+        num_days = 31
+    case ("February")
+        num_days = 28
+    case ("March")
+        num_days = 31
+    case default
+        num_days = 30
+end select
+```
+
+## Exercício
+
+Escreva um programa que pegue um inteiro do terminal e para os casos 1 até 4 imprima "Isso é um", "Isso é dois"... para cada caso, e pro caso default imprima "Não está entre 1 e 4"
