@@ -194,9 +194,63 @@ integer          :: numeroInteiro = 3
 character        :: caractere     = "a"
 character(len=5) :: nome          = "atila"
 
-print*, "Número real:", numeroDecimal
-print*, "Número inteiro:", numeroInteiro
-print*, "Caractere único:", caractere
-print*, "String:", nome
+print*, "Número real: ", numeroDecimal
+print*, "Número inteiro: ", numeroInteiro
+print*, "Caractere único: ", caractere
+print*, "String: ", nome
 ```
+
+# Números complexos
+
+```fortran
+program numerosComplexos
+    implicit none
+    complex, parameter :: i = (0, 1)   ! sqrt(-1)
+    complex :: x, y, z
+    x = (7, 8)
+    y = (5, -7)
+    write(*,*) i * x * y
+    z = x + y
+    print *, "z = x + y = ", z
+    z = x - y
+    print *, "z = x - y = ", z
+    z = x * y
+    print *, "z = x * y = ", z
+    z = x / y
+    print *, "z = x / y = ", z
+end program numerosComplexos
+```
+
+# Funções instrísecas
+
+```fortran
+x = sin(3.14159)
+y = exp(0)
+z = log(1)
+w = acos(-1)
+```
+
+# I/O Básico
+
+## Para ler variável do terminal
+
+```fortran
+read(*,*) variavel
+```
+
+## Para imprimir o valor de uma variável na tela
+
+```fortran
+print*, variavel
+```
+
+ou
+
+```fortran
+write(*,*) variavel
+```
+
+## Exercício
+
+Escrever código que lê dois números reais do terminal e imprime o resultado da soma deles
 
