@@ -111,11 +111,92 @@ Muitas das características do Fortran são tanto uma vantagem quanto uma desvan
 
 ![](figs/pythonxfortran2.png)
 
+# Comparação com Python
+
+[Python x Octave x Fortran](https://www.youtube.com/watch?v=pJIxVS-wlHc)
+
 # Fortran em paralelo, exemplo
 
 ![Padrões de programação em paralelo: dividir o problema, trocar dado, computar, gravar resultados no disco](figs/paralelo.png){height=8cm}
 
 
+# Preparando ambiente de desenvolvimento
+
+Para garantir que vamos trabalhar com a mesma versão dos programas, preparei um ambiente para a gente, siga os comandos abaixo
+```shell
+git clone https://github.com/AtilaSaraiva/Curso-fortran-2022
+cd Curso-fortran-2022/codigos
+sh prep.sh
+```
+
 # Hello world
 
 Agora vamos escrever um código de hello world
+
+## Abrindo arquivo
+```
+cd 1-helloworld
+notepadqq oi.f90 &
+```
+
+## Código
+
+```fortran
+program hellou
+    implicit none
+
+    print*, "E ai galera"
+end program hellou
+```
+
+## Compilar e executar
+
+```
+gfortran oi.f90 -o oi
+./oi
+```
+
+# Estrutura básica de um programa
+
+```fortran08
+program main
+    implicit none
+    integer :: a
+
+    a = increment(34)
+    write (*,*) a
+
+contains
+
+    function increment(input) result (output)
+        integer :: output
+        integer :: input
+
+        output = input + 1
+    end function increment
+
+end program main
+```
+
+# Comentário
+
+```fortran
+a = b ! Isso é um comentario
+
+c = d ! Isso!! também é um comentário
+```
+
+# Variáveis
+
+```fortran
+real             :: numeroDecimal = 3.141592
+integer          :: numeroInteiro = 3
+character        :: caractere     = "a"
+character(len=5) :: nome          = "atila"
+
+print*, "Número real:", numeroDecimal
+print*, "Número inteiro:", numeroInteiro
+print*, "Caractere único:", caractere
+print*, "String:", nome
+```
+
