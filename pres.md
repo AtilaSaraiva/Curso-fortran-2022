@@ -375,3 +375,163 @@ end select
 ## Exercício
 
 Escreva um programa que pegue um inteiro do terminal e para os casos 1 até 4 imprima "Isso é um", "Isso é dois"... para cada caso, e pro caso default imprima "Não está entre 1 e 4"
+
+# Funções e Subrotinas
+
+::: columns
+
+:::: {.column width=60%}
+```fortran
+function sum(a, b)
+    integer, intent(in) :: a, b
+    integer             :: sum
+
+    sum = a + b
+
+end function sum
+
+subroutine add(a, b)
+    integer, intent(in out) :: a
+    integer, intent(in)     :: b
+
+    a = a + b
+    print*, 'a = ',a
+end subroutine add
+```
+::::
+
+
+:::: {.column width=40%}
+```
+total = 2 * sum(3,5)
+
+call add(a,3)
+```
+::::
+
+:::
+
+# O que devo usar
+
+![Decidindo quando usar subrotina ao invés de subrotina](figs/funcao.pdf){height=8cm}
+
+# Exercício
+
+Abra o código da pasta 7-funcao e passe todas as operações destacadas para dentro de funções ou subrotinas de acordo
+
+# Modules
+
+```fortran
+module biblioteca
+    implicit none
+contains
+    pure integer function add (a,b)
+        integer, intent(in):: a, b
+    end function add
+end module biblioteca
+
+program main
+    use biblioteca
+    implicit none
+    integer:: a=1, b=2
+
+    print*, add(a,b)
+
+end program main
+```
+
+# Exercício
+
+Copie a pasta 7-funcao para 8-module e mude as funções e subrotinas escritas para dentro de um módulo.
+
+# Array
+
+## Como declarar um array 1D, 2D, ... ND?
+```fortran
+real :: array(2)     ! array 2
+real :: array(2,2)   ! array 2x2
+real :: array(2,2,2) ! array 2x2x2
+```
+
+## Como inserir um valor num array
+```fortran
+array(1,1) = 1
+```
+
+## Como inserir um valor para todos os items do array
+```fortran
+array = 1
+```
+
+## Como inicializar vários valores
+```fortran
+array = [ 1, 2, 3, 4 ]
+```
+
+# Array
+
+## Como passar array para função
+
+```fortran
+subroutine foo (a, b, c, d, n)
+    integer :: n
+    real    :: a(n)    ! declaração explicita
+    real    :: b(:)    ! forma assumida
+    real    :: c(:,:)  ! forma assumida 2D
+    real    :: d(..)   ! dimensão assumida
+
+    ...
+end subroutine foo
+```
+
+# Array
+
+## Como descobrir as dimensões de um array
+
+```fortran
+tamanho = size(a)
+```
+ou
+```fortran
+integer :: m, n
+real    :: array(:,:)
+
+m = size(array, 1)
+n = size(array, 2)
+```
+
+# Exercício
+
+Vá na pasta 9-array e escreva o loop do dot product no espaço comentado
+
+# Funções intrísecas para array
+
+```
+matmul()
+dot_product()
+transpose()
+```
+
+# Arrays alocáveis
+
+```fortran
+program foo
+    implicit none
+    real,allocatable :: a(:)
+
+    allocate( a(10) )
+
+    a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+end program foo
+```
+
+# Arrays alocáveis
+
+```fortran
+program foo
+    implicit none
+    real,allocatable :: a(:)
+
+    a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+end program foo
+```
