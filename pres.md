@@ -522,6 +522,8 @@ program foo
     allocate( a(10) )
 
     a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+
+    deallocate(a)
 end program foo
 ```
 
