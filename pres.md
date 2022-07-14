@@ -537,3 +537,90 @@ program foo
     a = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 end program foo
 ```
+
+# Fazendo fatiamento de array
+
+```fortran
+program foo
+    implicit none
+    real,allocatable :: a(:)
+
+    a = [ (i, i=1,10) ]
+
+    print*, a
+    print*, a(:4)
+    print*, a(2:5)
+end program foo
+```
+
+## Exercício:
+
+Ir na pasta 9-array e reproduzir o código desse slide
+
+# I/O de arquivo
+
+O comando base para manipulação de arquivo é:
+
+```fortran
+integer :: io
+open(newunit=io, file="log.txt")
+! ...
+close(io)
+```
+
+# I/O de arquivo
+
+Para criar uma acesso read-only ao arquivo, as opções `status` e `action` tem que ser especificadas
+
+```fortran
+integer :: io
+open(newunit=io, file="log.txt", &
+    status="old", action="read")
+read(io, *) a, b
+close(io)
+```
+
+Você também pode checar se um arquivo existe antes de fazer algo:
+
+```fortran
+logical :: exists
+inquire(file="log.txt", exist=exists)
+if (exists) then
+  ! ...
+end if
+```
+
+# I/O de arquivo
+
+```fortran
+program aprendendoIO
+    implicit none
+    integer :: io
+    real,allocatable :: v(:,:)
+
+    allocate(v(2,2))
+    v(1,:) = [ 1, 2 ]
+    v(2,:) = [ 3, 4 ]
+
+    open(newunit=io, file="log.txt", &
+      & status="replace", action="write")
+    write(io, *) v(:,:)
+    close(io)
+end program aprendendoIO
+```
+
+## Exercicio:
+
+Reproduzir código do slide na pasta 10-io_arquivo
+
+
+# I/O de arquivo
+
+Para ler arquivos binários
+
+
+# I/O de arquivo
+
+Tem várias opções para o `open`:
+
++ `new
