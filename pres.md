@@ -683,3 +683,14 @@ Cria um array, escreve ele em um arquivo binário, depois lê o arquivo e imprim
 Estudar código na pasta 13-pyplotfortran
 
 
+# Lendo um campo de velocidade - Marmousi 2D
+
+Vá para a pasta 14-io_binario_plot/marmousi_plot/app e edite o arquivo main.f90 para ler um arquivo binário `model-375.cwp`.
+
+# Projeto Filtro Laplaciano
+
+Vamos escrever o código de um filtro laplaciano aplicado ao campo de velocidade Marmousi 2D.
+
+# Argumentos opicionais para funções
+
+

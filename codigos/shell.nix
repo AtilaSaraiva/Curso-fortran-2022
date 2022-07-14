@@ -20,4 +20,8 @@ mkShell {
     fortran-fpm
     #notepadqq
   ];
+
+  shellHooks = ''
+    export FPM_FFLAGS="-DREAL32"
+  '';
 }

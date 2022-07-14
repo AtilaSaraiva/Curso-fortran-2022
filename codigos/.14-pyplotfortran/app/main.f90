@@ -1,13 +1,17 @@
  program plotArray
-     use,intrinsic :: iso_fortran_env, only: wp => real64
+     use,intrinsic :: iso_fortran_env, only: wp => real32
      use pyplot_module
      implicit none
 
      type(pyplot) :: plt
-     real(wp) :: A(10,10)
+     integer, parameter:: nz=375, nx=368
+     real(wp) :: A(nz,nx)
+     integer:: io
 
-     A(1:5,:) = 1
-     A(6:10,:) = 2
+     open(newunit=io, file="model-375.cwp", access="stream", &
+         status="old", action="read")
+     read(io) A
+     close(io)
 
      !plot it:
      call plt%initialize(grid=.true.,xlabel='N', ylabel='M', &
