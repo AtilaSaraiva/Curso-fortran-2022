@@ -613,14 +613,73 @@ end program aprendendoIO
 
 Reproduzir código do slide na pasta 10-io_arquivo
 
-
 # I/O de arquivo
 
-Para ler arquivos binários
+Tem várias opções para o `open`, as principais são
+
++ **`newunit=nu`** unidade identificadora do arquivo, integer
++ **`file=fln`** string contendo nome do arquivo
++ **`status=stn`,** onde `stn="old"`,`"new"`, ou `"replace"`
++ **`action=act`,** onde `act="write"`, `"read"`, ou `"readwrite"`
++ **`iostat=ios`** variável de controle de erro, `ios/=0` para erros, integer
+
+## Mais avançadas
+
++ **`access=acl`,** onde `acl="sequential"`, `"direct"`, `"stream"`,
++ **`recl=rcl`**  string que indica o tamanho de cada gravação, ou record do arquivo binário aberto com `access=direct`
++ **`form=frm`**, onde `frm="formatted" ou `"unformatted"`
 
 
-# I/O de arquivo
+# I/O de arquivo binário - acesso direto
 
-Tem várias opções para o `open`:
+Para ler arquivos binários geralmente se usa acesso direto
 
-+ `new
+Para escrever
+```fortran
+inquire(iolength=length) v
+open(newunit=io, file="binary", access="direct",&
+    recl=length, status="replace", action="write")
+write(io, rec=1) v
+```
+
+Para ler
+```fortran
+inquire(iolength=length) v
+open(newunit=io, file="binary", access="direct",&
+    recl=length, status="old", action="read")
+read(io, rec=1) v
+```
+
+## Exercício:
+
+Cria um array, escreve ele em um arquivo binário, depois lê o arquivo e imprime o array na tela
+
+# I/O de arquivo binário - acesso stream
+
+Pode ser também usado o stream access
+
+Para escrever
+```fortran
+open(newunit=io, file="binary", access="stream",&
+    status="replace", action="write")
+write(io, rec=1) v
+```
+
+Para ler
+```fortran
+inquire(iolength=length) v
+open(newunit=io, file="binary", access="stream",&
+    status="old", action="read")
+read(io, rec=1) v
+```
+
+## Exercício:
+
+Cria um array, escreve ele em um arquivo binário, depois lê o arquivo e imprime o array na tela
+
+
+# Pausa para aprender sobre fpm e pyplot-fortran
+
+Estudar código na pasta 13-pyplotfortran
+
+
