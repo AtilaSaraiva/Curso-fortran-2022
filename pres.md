@@ -662,15 +662,14 @@ Para escrever
 ```fortran
 open(newunit=io, file="binary", access="stream",&
     status="replace", action="write")
-write(io, rec=1) v
+write(io) v
 ```
 
 Para ler
 ```fortran
-inquire(iolength=length) v
 open(newunit=io, file="binary", access="stream",&
     status="old", action="read")
-read(io, rec=1) v
+read(io) v
 ```
 
 ## Exercício:

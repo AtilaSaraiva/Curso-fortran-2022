@@ -6,7 +6,8 @@
 
     type(pyplot) :: plt
     integer, parameter:: nz=375, nx=368
-    real(wp) :: A(nz,nx)
+    real, parameter :: dx=25, dz=8
+    real(wp) :: A(nz,nx), A_filtrado(nz,nx)
     integer:: io
 
     open(newunit=io, file="model-375.cwp", access="stream", &
@@ -18,6 +19,14 @@
     call plt%initialize(grid=.true.,xlabel='N', ylabel='M', &
                         title='Plot of $A$',legend=.true.)
     call plt%add_imshow(A)
+    call plt%showfig()
+
+    A_filtrado = laplaciano(A, dz, dx)
+
+    !plot it:
+    call plt%initialize(grid=.true.,xlabel='N', ylabel='M', &
+                        title='Plot of $A$',legend=.true.)
+    call plt%add_imshow(A_filtrado)
     call plt%showfig()
 
  end program plotArray
