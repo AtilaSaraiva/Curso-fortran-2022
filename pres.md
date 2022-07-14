@@ -693,4 +693,91 @@ Vamos escrever o código de um filtro laplaciano aplicado ao campo de velocidade
 
 # Argumentos opicionais para funções
 
+```fortran
+program main
+    print *, "[no args] tester()   :", tester()
+    print *, "[   args] tester(1.0):", tester(1.0)
 
+contains
+
+    real function tester(a)
+        real, intent (in), optional :: a
+        if (present(a)) then
+            tester = a
+        else
+            tester = 0.0
+        end if
+    end function
+end program
+```
+
+# Atributo `save` - salvando variáveis entre calls
+
+```fortran
+program main
+    implicit none
+
+    call f()  ! yields: 1
+    call f()  ! yields: 2
+    call f()  ! yields: 3
+
+contains
+
+    subroutine f()
+        implicit none
+        integer, save :: i = 0
+
+        i = i + 1
+        print *, "value i:", i
+    end subroutine f
+end program main
+```
+
+# Sobrecarregamento de funções - o problema
+
+O objetivo é poder chamar uma função add(x, y) que funcione tanto para `integer` quanto para `character`.
+
+```fortran
+pure function add_int( x, y )
+    integer, intent (in) :: x, y
+    integer :: add_int
+
+    add_int = x+y
+end function add_int
+
+pure function add_char( x, y )
+    character (len=*), intent (in) :: x, y
+    character (len=len(x)+len(y)), allocatable :: add_char
+
+    add_char = x // y
+end function add_char
+```
+
+# Sobrecarregamento de funções - a solução
+
+```fortran
+module add_mod
+    implicit none
+    private
+    public :: add
+
+    interface add
+        procedure add_int, add_char
+    end interface add
+
+contains
+    pure function add_int( x, y )
+        integer, intent (in) :: x, y
+        integer :: add_int
+
+        add_int = x+y
+    end function add_int
+
+    pure function add_char( x, y )
+        character (len=*), intent (in) :: x, y
+        character (len=len(x)+len(y)), allocatable :: add_char
+
+        add_char = x // y
+    end function add_char
+end module add_mod
+```
